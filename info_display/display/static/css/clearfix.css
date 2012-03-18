@@ -1,0 +1,21 @@
+/**
+ * Apply the clearfix class to boxes with floated elements
+ * to give them height. Use instead of <br clear="all"/> or
+ * clear: both;
+ * see: http://www.positioniseverything.net/easyclearing.html
+ */
+.clearfix:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+.clearfix {
+    display:inline-block;
+}
+/* Hide from IE Mac \*/
+.clearfix {
+    display:block;
+}
+/* End hide from IE Mac */ 

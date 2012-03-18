@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
         <link href='{{ STATIC_URL }}css/display.css' rel='stylesheet'>
+        <link href='{{ STATIC_URL }}css/clearfix.css' rel='stylesheet'>
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,700' rel='stylesheet' type='text/css'>
     </head>
@@ -16,11 +17,13 @@
                 </div>
                 <br />
                 <div class='row-fluid info-panels'>
-                    <div id='left-info' class='span6'>
-                        One
+                    <div id='left-info' class='span6 clearfix'>
+                        <h2>Signup Trends</h2>
+                        <div class='info-panel-data graph'>No graph data available.</div> 
                     </div>
                     <div id='right-info' class='span6'>
-                        Two
+                        <h2>Yesterday's Signups</h2>
+                        <div id='yesterdays-signupds' class='info-panel-data'>{{ yesterdays_signups }}</div> 
                     </div>
                 </div>
             </div>
@@ -33,6 +36,7 @@
             function update_users() {
                 $.getJSON({% url data %}, function(data) {
                     var total_subscribers = data.total_subscribers;
+
                     $main_message.html(total_subscribers);
                     console.log(data);
                 });

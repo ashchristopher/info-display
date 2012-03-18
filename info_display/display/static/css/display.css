@@ -3,17 +3,16 @@ body {
 }
 
 #id-content {
-    background: url("../img/bg-drops.png") no-repeat scroll left bottom transparent;
+    background: url("../img/bg-drops.png") no-repeat scroll left top transparent;
 }
 
 #id-main-message {
     text-align: center;
-    font-weight: bold;
-    font-size: 200px;
+    font-size: 350px;
     display: block;
-    line-height: 200px;
+    line-height: 350px;
     color: #fff;
-    text-shadow: 0px 0px 15px #AAA;
+    text-shadow: 0px 0px 10px #AAA;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
 }
@@ -25,16 +24,32 @@ body {
     color: #fff;
 }
 
-#left-info {
-    background-color:rgba(255,255,255, 0.6);
-    border-radius: 15px;
-}
-
-#right-info {
-    background-color:rgba(255,255,255, 0.6);
-    border-radius: 15px;
-}
-
 .info-panels {
-    margin-top: 50px;
+    margin-top: 250px;
+    color: #fff;
 }
+
+.info-panels h2 {
+    font-size: 36px;
+    line-height: 42px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.info-panel-data {
+    padding: 75px 0 75px 0;
+    text-align: center;
+    line-height: 144px;
+    font-size: 144px;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+
+    background-color:rgba(255,255,255, 0.4);
+    border-radius: 5px;
+    border: 2px solid #7fa9b8;
+}
+
+.info-panel-data.graph {
+    font-size: 36px;
+}
+
