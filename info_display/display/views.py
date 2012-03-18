@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 
 from display.models import MainMessage
+from display.mixins import JSONResponseMixin
 
 
 class HomeView(TemplateView):
@@ -14,7 +15,12 @@ class HomeView(TemplateView):
             main_message = None
  
         context = {
-            'main_message' : getattr(main_message, 'message', 'No Data')
+            'total_subscribers' : getattr(main_message, 'message', 'No Data')
         }
  
         return self.render_to_response(context)
+
+
+class JSONView(JSONResponseMixin, HomeView):
+    
+    template_name = None
