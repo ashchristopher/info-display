@@ -152,3 +152,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from info_display.localsettings import *
+except ImportError:
+    pass
