@@ -1,8 +1,20 @@
 from django.views.generic import TemplateView
 
+from display.models import MainMessage
+
+
 class HomeView(TemplateView):
 
     template_name = 'display/home.html'
 
     def get(self, request):
-        return self.render_to_response({})
+        try:
+            main_message = MainMessage.objects.latest('date_added')
+        except MainMessage.DoesNotExist:
+            main_message = None
+ 
+        context = {
+            'main_message' : getattr(main_message, 'message', 'No Data')
+        }
+ 
+        return self.render_to_response(context)
