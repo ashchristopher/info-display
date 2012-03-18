@@ -1,9 +1,12 @@
 from django.db import models
 
-class MainMessage(models.Model):
-    message = models.CharField(max_length=120)
+class SubscriberCount(models.Model):
+    total_subscribers = models.CharField(max_length=120)
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = 'Subscriber Counts'
+
     def __unicode__(self):
-        return self.message
+        return self.total_subscribers

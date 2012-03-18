@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from display.models import MainMessage
+from display.models import SubscriberCount
 
 
-class MainMessageAdmin(admin.ModelAdmin):
+class SubscriberCountAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(MainMessage, MainMessageAdmin)
+admin.site.register(SubscriberCount, SubscriberCountAdmin)
