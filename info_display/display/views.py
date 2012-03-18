@@ -1,3 +1,5 @@
+import locale
+
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -26,9 +28,16 @@ class HomeView(TemplateView):
         except YesterdaysSignupsCount.DoesNotExist:
             yesterdays_signups = None
 
+        locale.setlocale(locale.LC_ALL, 'en_US')
+
+        total_subscribers = getattr(subscribers, 'total_subscribers', NO_DATA)
+        yesterdays_signups = getattr(yesterdays_signups, 'subscribers', NO_DATA)
+
         context = {
-            'total_subscribers' : getattr(subscribers, 'total_subscribers', NO_DATA),
-            'yesterdays_signups' : getattr(yesterdays_signups, 'subscribers', NO_DATA),
+            'total_subscribers' : locale.format("%d", total_subscribers, grouping=True),
+            'yesterdays_signups' : locale.format("%d", yesterdays_signups, grouping=True),
+            'total_subscribers_raw' : total_subscribers,
+            'yesterdays_signups_raw' : yesterdays_signups,
         }
 
         return context

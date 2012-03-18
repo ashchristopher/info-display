@@ -1,7 +1,7 @@
 from django.db import models
 
 class SubscriberCount(models.Model):
-    total_subscribers = models.CharField(max_length=120)
+    total_subscribers = models.IntegerField(max_length=120)
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
@@ -13,7 +13,7 @@ class SubscriberCount(models.Model):
 
 
 class YesterdaysSignupsCount(models.Model):
-    subscribers = models.CharField(max_length=120)
+    subscribers = models.IntegerField(max_length=120)
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
 
