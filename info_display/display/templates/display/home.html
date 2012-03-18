@@ -22,7 +22,7 @@
                     </div>
                     <div id='right-info' class='span6'>
                         <h2>Yesterday's Signups</h2>
-                        <div id='yesterdays-signupds' class='info-panel-data'>{{ yesterdays_signups }}</div> 
+                        <div id='id-yesterdays-signups' class='info-panel-data'>{{ yesterdays_signups }}</div> 
                     </div>
                 </div>
             </div>
@@ -31,17 +31,24 @@
         <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
         <script>
             var $main_message = $('#id-main-message');
+            var $yesterdays_signups = $('#id-yesterdays-signups');
 
             function update_users() {
                 $.getJSON({% url data %}, function(data) {
                     var total_subscribers = data.total_subscribers;
+                    var prev_signups = data.yesterdays_signups;
+
+
+                    console.log(prev_signups);
 
                     $main_message.html(total_subscribers);
+                    $yesterdays_signups.html(prev_signups);
+
                     console.log(data);
                 });
             }
 
-            window.setInterval(update_users, 30000);
+            window.setInterval(update_users, 3000);
         </script>
     </body>
 </html>

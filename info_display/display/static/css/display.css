@@ -47,13 +47,14 @@ body {
     line-height: 42px;
     padding-bottom: 20px;
     text-align: center;
+    text-decoration: underline
 }
 
 .info-panel-data {
-    padding: 75px 0 75px 0;
+    padding: 0 0 100px;
     text-align: center;
     line-height: 144px;
-    font-size: 144px;
+    font-size: 180px;
     font-weight: 700;
     font-family: 'Open Sans', sans-serif;
 
