@@ -15,43 +15,34 @@ class HomeView(TemplateView):
 
     template_name = 'display/home.html'
 
-
-    def get_context_data(self):
-        """ Get the context with subscriber info populated. """
-        try:
-            subscribers = SubscriberCount.objects.latest('date_added')
-        except SubscriberCount.DoesNotExist:
-            subscribers = None
-
-        try:
-            yesterdays_signups = YesterdaysSignupsCount.objects.latest('date_added')
-        except YesterdaysSignupsCount.DoesNotExist:
-            yesterdays_signups = None
-
-        locale.setlocale(locale.LC_ALL, 'en_US')
-
-        total_subscribers = getattr(subscribers, 'total_subscribers', NO_DATA)
-        yesterdays_signups = getattr(yesterdays_signups, 'subscribers', NO_DATA)
-
-        context = {
-            'total_subscribers' : locale.format("%d", total_subscribers, grouping=True),
-            'yesterdays_signups' : locale.format("%d", yesterdays_signups, grouping=True),
-            'total_subscribers_raw' : total_subscribers,
-            'yesterdays_signups_raw' : yesterdays_signups,
-        }
-
-        return context
-
     def get(self, request):
 
+        # initialize the context
+        context = {
+            'total_subscribers' : '--',
+            'yesterdays_signups' : '--',
+            'total_subscribers_raw' : '--',
+            'yesterdays_signups_raw' : '--',
+        }
+
+
         # only let staff accounts view the data.
-        if not request.user.is_staff:
-            context = {
-                'total_subscribers' : '--',
-                'yesterdays_signups' : '--',
-            }
-        else:
-            context = self.get_context_data()
+        if request.user.is_staff:
+            locale.setlocale(locale.LC_ALL, 'en_US')
+
+            try:
+                subscribers = SubscriberCount.objects.latest('date_added')
+                context['total_subscribers_raw'] = subscribers.total_subscribers
+                context['total_subscribers'] = locale.format("%d", subscribers.total_subscribers, grouping=True)
+            except SubscriberCount.DoesNotExist:
+                pass
+
+            try:
+                yesterdays_signups = YesterdaysSignupsCount.objects.latest('date_added')
+                context['yesterdays_signups_raw'] = yesterdays_signups.subscribers
+                context['yesterdays_signups'] = locale.format("%d", yesterdays_signups.subscribers, grouping=True)
+            except YesterdaysSignupsCount.DoesNotExist:
+                pass
 
         return self.render_to_response(context)
 
