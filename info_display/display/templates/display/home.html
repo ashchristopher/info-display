@@ -29,10 +29,14 @@
         </div>
 
         <audio id='audio1' preload=auto autobuffer> 
-            <source src="{{ STATIC_URL}}audio/cha_ching.mp3" />
+            <source src="{{ STATIC_URL}}audio/cha_ching.mp3" >
+            <source src="{{ STATIC_URL}}audio/cha_ching.ogg" >
+            <source src="{{ STATIC_URL}}audio/cha_ching.wav" >
         </audio>
         <audio id='audio2' preload=auto autobuffer> 
-            <source src="{{ STATIC_URL}}audio/woohoo.mp3" />
+            <source src="{{ STATIC_URL}}audio/woohoo.mp3" >
+            <source src="{{ STATIC_URL}}audio/woohoo.ogg" >
+            <source src="{{ STATIC_URL}}audio/woohoo.wav" >
         </audio>
 
 
@@ -55,18 +59,17 @@
                         $main_message.html(total_subscribers);
                         
                         // this audio stuff is hacky - but it works so...
-                        console.log('play audio');
                         audio.src = "{{ STATIC_URL}}audio/woohoo.mp3";  // reset the audio
                         audio.play();
                     }
                     
                     $yesterdays_signups.html(prev_signups);
 
-                    console.log(data);
+                    // console.log(data);
                 });
             }
 
-            window.setInterval(update_users, 10000);
+            window.setInterval(update_users, 1000);
         </script>
     </body>
 </html>
