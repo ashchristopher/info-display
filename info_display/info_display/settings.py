@@ -8,7 +8,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Ash Christopher', 'ash@waveaccounting.com'),
 )
 
 MANAGERS = ADMINS
@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -110,9 +111,7 @@ ROOT_URLCONF = 'info_display.urls'
 WSGI_APPLICATION = 'info_display.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_PATH, 'info_display/templates'),
 )
 
 INSTALLED_APPS = (
@@ -129,6 +128,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'bootstrap_files',
     'display',
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -160,8 +160,8 @@ LOGGING = {
     }
 }
 
-def custom_show_toolbar():
-    return DEBUG
+def custom_show_toolbar(request):
+    return DEBUG and request.user.is_superuser
 
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
