@@ -12,10 +12,11 @@ body {
     display: block;
     line-height: 350px;
     color: #fff;
-    text-shadow: 0px 0px 10px #AAA;
+    text-shadow: 9px 5px 17px #000;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     min-height: 507px;
+    margin-bottom: 100px;
 }
 
 #signups {
@@ -23,11 +24,6 @@ body {
     font-size: 36px;
     line-height: 48px;
     color: #fff;
-}
-
-#id-panels {
-    position: fixed;
-    bottom: 0;
 }
 
 #left-info {
@@ -38,7 +34,6 @@ body {
 }
 
 .info-panels {
-    /*margin-top: 250px;*/
     color: #fff;
 }
 
@@ -51,16 +46,16 @@ body {
 }
 
 .info-panel-data {
-    padding: 0 0 100px;
+    padding: 75px 0 100px;
     text-align: center;
     line-height: 144px;
     font-size: 180px;
     font-weight: 700;
     font-family: 'Open Sans', sans-serif;
-
-    /*background-color:rgba(255,255,255, 0.4);*/
-    /*border-radius: 5px;*/
-    /*border: 2px solid #7fa9b8;*/
+    text-shadow: 7px 13px 11px #111;
+    background-color:rgba(123,255,255, 0.4);
+    border-radius: 5px;
+    border: 2px solid #7fa9b8;
 }
 
 .info-panel-data.graph {

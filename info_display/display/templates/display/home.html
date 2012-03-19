@@ -27,28 +27,46 @@
                 </div>
             </div>
         </div>
+
+        <audio id='audio1' preload=auto autobuffer> 
+            <source src="{{ STATIC_URL}}audio/cha_ching.mp3" />
+        </audio>
+        <audio id='audio2' preload=auto autobuffer> 
+            <source src="{{ STATIC_URL}}audio/woohoo.mp3" />
+        </audio>
+
+
+
         <script src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script>
         <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
         <script>
             var $main_message = $('#id-main-message');
             var $yesterdays_signups = $('#id-yesterdays-signups');
+            var audio = document.getElementById('audio2');
 
             function update_users() {
                 $.getJSON({% url data %}, function(data) {
                     var total_subscribers = data.total_subscribers;
                     var prev_signups = data.yesterdays_signups;
 
+                    var cur_total_subscribers = $main_message.html();
 
-                    console.log(prev_signups);
-
-                    $main_message.html(total_subscribers);
+                    if (cur_total_subscribers != total_subscribers) {
+                        $main_message.html(total_subscribers);
+                        
+                        // this audio stuff is hacky - but it works so...
+                        console.log('play audio');
+                        audio.src = "{{ STATIC_URL}}audio/woohoo.mp3";  // reset the audio
+                        audio.play();
+                    }
+                    
                     $yesterdays_signups.html(prev_signups);
 
                     console.log(data);
                 });
             }
 
-            window.setInterval(update_users, 60000);
+            window.setInterval(update_users, 10000);
         </script>
     </body>
 </html>
